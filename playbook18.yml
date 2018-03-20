@@ -1,0 +1,17 @@
+---
+- name: Creating file if dir is present
+  hosts: all
+  tasks:
+   - name: Check for dir
+     stat:
+      path: /home/vagrant/folder143
+     register: results
+   - name: Creating file
+     file:
+      name: /home/vagrant/folder143/file45
+      state: touch
+     when:
+      results.stat.exists == true
+
+
+...

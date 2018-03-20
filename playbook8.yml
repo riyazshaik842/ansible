@@ -1,0 +1,16 @@
+---
+- name: User Management
+  hosts: all
+  tasks: 
+   - name: Creating user
+     user:
+      name: "{{a}}"
+      password: "{{b}}"
+      home: "{{c}}"
+      shell: "{{d}}"
+ 
+
+
+
+
+...

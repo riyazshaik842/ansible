@@ -1,0 +1,19 @@
+---
+- name: Looping in Ansible
+  hosts: dbserver
+  tasks:
+   - name: Install/uninstalling/updating packages
+     apt:
+      name: "{{item.a}}"
+      state: "{{item.b}}"
+      update_cache: "{{item.c}}"
+     with_items:
+      - {a: tree,b: present,c: no}
+      - {a: git,b: present,c: yes}
+      - {a: maven,b: latest,c: no}
+
+
+
+
+...
+

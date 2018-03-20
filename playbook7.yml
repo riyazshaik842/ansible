@@ -1,0 +1,10 @@
+---
+- name: Installing/uninstalling packages
+  hosts: dbserver
+  tasks:
+   - name: Install/uinstall
+     apt:
+      name: "{{a}}"
+      state: "{{b}}"
+      update_cache: "{{c}}"
+...

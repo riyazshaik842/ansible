@@ -1,0 +1,15 @@
+---
+- name: Creating dir and displaying output
+  hosts: all
+  tasks:
+   - name: create dir
+     file:
+      name: folder1
+      state: directory
+     register: results
+   - name: Display output of the above module
+     debug:
+      var: results   
+  
+
+...

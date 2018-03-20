@@ -1,0 +1,19 @@
+---
+- name: User management and file/dir creation
+  hosts: all
+  tasks:
+   - name: User creation
+     user:
+      name: "{{item.a}}"
+      password: "{{item.b}}"
+      home: "{{item.c}}"
+     with_items:
+      - {a: Hari,b: intelliq,c: /home/vagrant/Hari}
+      - {a: Ravi,b: password,c: /home/Ravi}
+   - name: File/Dir Creation
+     file:
+      name: "{{item.d}}"
+      state: "{{item.e}}"
+     with_items:
+      - {d: /home/vagrant/Hari/file1,e: touch}
+      - {d: /home/Ravi/dir1,e: directory}

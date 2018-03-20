@@ -1,0 +1,12 @@
+---
+- name: When conditions
+  hosts: 192.168.60.23
+  vars:
+   - a: 20
+  tasks:
+   - name: Install tree
+     apt:
+      name: tree
+      state: present
+     when:
+      a == 10

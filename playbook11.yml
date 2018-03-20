@@ -1,0 +1,13 @@
+---
+- name: Using host scope variables
+  hosts: 192.168.60.23
+  tasks:
+   - name: Installing tree
+     apt:
+      name: "{{a}}"
+      state: "{{b}}"
+      update_cache: "{{c}}"
+
+
+
+...

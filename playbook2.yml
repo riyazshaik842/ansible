@@ -1,0 +1,19 @@
+---
+- name: Creating users and files
+  hosts: all
+  tasks:
+   - name: Creating user
+     user:
+      name: myintelliq
+      password: intelliq
+      home: /home/myintelliq
+      shell: /bin/bash
+   - name: Creating files in user
+     file:
+      name: /home/myintelliq/file1
+      state: touch
+
+
+
+
+...

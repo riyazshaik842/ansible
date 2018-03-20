@@ -1,0 +1,11 @@
+---
+- name: Configuring Apache2
+  hosts: 192.168.60.24
+  tasks:
+   - include: "{{item}}"
+     with_items:
+      - install_apache2.yml
+      - edit_index.html
+      - restart_apache2.yml
+      - url_response.yml
+...

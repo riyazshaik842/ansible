@@ -1,0 +1,11 @@
+---
+- name: Capturing info about files/dir
+  hosts: all
+  tasks:
+   - name: Checking for dir
+     stat:
+      path: /home/vagrant/folder1
+     register: results
+   - name: Display results
+     debug:
+      var: results

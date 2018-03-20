@@ -1,0 +1,14 @@
+---
+- name: Git version controlling
+  hosts: dbserver
+  tasks:
+   - name: Install git
+     apt:
+      name: git
+      state: present
+   - name: Clone git remote repo
+     git:
+      clone: yes
+      dest: /home/vagrant/git1
+      repo: https://github.com/selenium-saikrishna/testing.git
+...

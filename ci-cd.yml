@@ -1,0 +1,64 @@
+---
+- name: git/maven isntallation
+  hosts: devserver
+  tasks:
+   - name: Installing git,maven
+     apt:
+      name: "{{item}}"
+      state: present
+     with_items:
+      - git
+      - maven
+      - tomcat7-admin
+   - name: Downloading dev code from git
+     git:
+      repo: https://github.com/selenium-saikrishna/maven.git
+      dest: /home/vagrant/gitrepo
+   - name: Creating an artifact
+     shell: cd /home/vagrant/gitrepo;mvn package
+   - name: Fetching artifact
+     fetch:
+      src: /home/vagrant/gitrepo/webapp/target/webapp.war
+      dest: /home/vagrant
+- name: Copy artifact into QA Server
+  hosts: qaserver
+  tasks:
+   - name: Copy artifact
+     copy:
+      src: /home/vagrant/10.10.11.11/home/vagrant/gitrepo/webapp/target/webapp.war
+      dest: /var/lib/tomcat7/webapps/qaenv.war
+- name: defualt-jdk,tomcat7
+  hosts: servers
+  tasks:
+   - name: Install tomcat7
+     apt:
+      name: "{{item}}"
+      state: present
+     with_items:
+      - git
+      - tomcat7
+      - tomcat7-admin
+- name: Continuous Testing
+  hosts: qaserver
+  tasks:
+   - name: Downloading testing programs
+     git:
+      repo: https://github.com/selenium-saikrishna/testing.git
+      dest: /home/vagrant/gittesting 
+   - name: Running testing jar
+     shell: java -jar /home/vagrant/gittesting/testing.jar
+- name: deploy into prod
+  hosts: prodserver
+  tasks:
+   - name: Copy artifact
+     copy:
+      src: /home/vagrant/10.10.11.11/home/vagrant/gitrepo/webapp/target/webapp.war
+      dest: /var/lib/tomcat7/webapps/prodenv.war
+
+
+
+
+ 
+
+
+...
